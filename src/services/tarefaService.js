@@ -54,6 +54,16 @@ async function listarTarefas(filtros = {}) {
     "SELECT t.*, c.nome AS categoria FROM tarefas t LEFT JOIN categorias c ON t.categoria_id = c.id",
   );
   let resultado = linhas;
+
+  if (filtros.status) {
+    resultado = resultado.filter((tarefa) => tarefa.status === filtros.status);
+  }
+  if (filtros.prioridade) {
+    resultado = resultado.filter(
+      (tarefa) => tarefa.prioridade === filtros.prioridade,
+    );
+  }
+
   return resultado;
 }
 
