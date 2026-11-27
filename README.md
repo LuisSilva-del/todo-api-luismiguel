@@ -55,27 +55,26 @@ Os erros das rotas de tarefa seguem o contrato do projeto: ID não numérico res
 
 ## Sprint 1 — Tarefas
 
-**Quadro no início:**
+### Placar final do npm run conferir
 
-![Quadro no início do Sprint 1](docs/sprint1-inicio.png)
+Resultado registrado após a execução dos testes:
 
-**Quadro no fim:**
+- **Sprint 1 — Tarefas: 14 de 14**
+- **Sprint 2 — Categorias e relacionamento: 0 de 8** (não iniciado; fora do escopo desta entrega)
+- **Bônus — desafios: 2 de 5** (os dois filtros B1 foram aprovados)
 
-O print final do quadro será salvo em `docs/sprint1-fim.png` depois de atualizar os cartões H01 a H06 conforme o andamento da sprint.
+![Placar final do npm run conferir](docs/placar-api.png)
 
-**Placar do `npm run conferir`:** Sprint 1: **14 de 14** · Bônus: **2 de 5**.
+### Quadro final do projeto
 
-Os 2 testes aprovados no bônus correspondem aos filtros B1 por status e prioridade.
+O arquivo `docs/sprint1-fim.png` existente contém cartões vinculados ao repositório antigo `livraria-api-grupo3`. Para não apresentar uma captura incorreta na entrega, a imagem do quadro final será inserida depois que os cartões H01 a H06 forem registrados no projeto individual e a captura for atualizada.
 
 ## Sprint 2 — Categorias e relacionamento
 
 Sprint 2 ainda não iniciado. Aguardando as instruções do professor para começar esta etapa.
-
-Os prints do quadro e o placar desta sprint serão adicionados depois que as atividades forem passadas e realizadas.
 
 ## Reflexão final
 
 - **O que aprendi:** Aprendi a organizar uma API no padrão MVC, separando rotas, controllers e services. Também pratiquei os métodos HTTP GET, POST, PUT, PATCH e DELETE, consultas ao MySQL e validação dos dados recebidos.
 - **O que foi mais difícil:** A parte mais difícil foi implementar as alterações com PUT e PATCH sem perder os dados que não deveriam ser modificados, além de verificar se cada rota retornava o status HTTP correto.
 - **O que eu faria diferente:** Eu testaria cada história no Insomnia assim que terminasse sua implementação e atualizaria o quadro e os commits durante o desenvolvimento, para identificar erros mais cedo.
-
