@@ -2,78 +2,80 @@
 
 **Aluno(a):** Luis Miguel Pereira da Silva
 
-API de gerenciamento de tarefas desenvolvida com Node.js, Express e MySQL, seguindo o padrão MVC.
+API de gestão de tarefas feita com Node.js, Express e MySQL, no padrão MVC.
 
-## Como executar
+## Como rodar
 
-1. Instale as dependências: `npm install`.
-2. Copie `.env.example` para `.env` e configure a senha do seu MySQL.
-3. Abra `src/database/todo.sql` no MySQL Workbench e execute o script completo.
-4. Inicie a API: `npm run dev`.
-5. Em outro terminal, execute os testes: `npm run conferir`.
+1. `npm install`
+2. Copie o arquivo `.env.example` para `.env` e coloque a senha do seu MySQL.
+3. No MySQL Workbench, abra e rode o arquivo `src/database/todo.sql` (raio ⚡).
+4. `npm run dev` → o terminal mostra `Conectado ao MySQL!`.
+5. Para conferir a API, em outro terminal: `npm run conferir`.
 
-A API usa a porta 3000 por padrão. O arquivo `.env` não deve ser enviado ao GitHub.
+## Endpoints
 
-## Endpoints — Sprint 1
+### Sprint 1 — Tarefas
 
-| Método | Rota | O que faz | Sucesso | Erros |
-|---|---|---|:---:|---|
-| GET | `/tarefas` | Lista todas as tarefas | 200 | — |
-| GET | `/tarefas/:id` | Busca uma tarefa pelo ID | 200 | 400 id inválido · 404 não existe |
-| POST | `/tarefas` | Cadastra uma tarefa | 201 | 400 dados inválidos |
-| PUT | `/tarefas/:id` | Substitui os dados da tarefa | 200 | 400 dados inválidos · 404 não existe |
-| PATCH | `/tarefas/:id` | Altera somente os campos enviados | 200 | 400 dados inválidos · 404 não existe |
-| DELETE | `/tarefas/:id` | Exclui uma tarefa | 204 | 404 não existe |
+| Método | Rota | O que faz | Status de sucesso |
+|---|---|---|:---:|
+| GET | `/tarefas` | Lista todas as tarefas | 200 |
+| GET | `/tarefas/:id` | Busca uma tarefa pelo ID | 200 |
+| POST | `/tarefas` | Cadastra uma tarefa | 201 |
+| PUT | `/tarefas/:id` | Substitui os dados de uma tarefa | 200 |
+| PATCH | `/tarefas/:id` | Altera somente os campos enviados | 200 |
+| DELETE | `/tarefas/:id` | Apaga uma tarefa | 204 |
 
-### Campos da tarefa
+Os erros das rotas de tarefa seguem o contrato do projeto: ID não numérico responde 400, tarefa inexistente responde 404 e dados inválidos respondem 400.
 
+**Campos da tarefa:**
+
+- `id`: número gerado pelo banco.
 - `titulo`: texto obrigatório.
 - `prioridade`: `baixa`, `media` ou `alta`.
 - `status`: `a_fazer`, `fazendo` ou `feita`.
 
 ### Bônus B1 — Filtros
 
-- `GET /tarefas?status=fazendo`: retorna somente tarefas com esse status.
-- `GET /tarefas?prioridade=alta`: retorna somente tarefas com essa prioridade.
+| Método | Rota | O que faz | Status de sucesso |
+|---|---|---|:---:|
+| GET | `/tarefas?status=fazendo` | Lista somente as tarefas com status fazendo | 200 |
+| GET | `/tarefas?prioridade=alta` | Lista somente as tarefas com prioridade alta | 200 |
+
+**Sprint 2 — Categorias e relacionamento:** ainda não iniciado. Esta etapa será documentada quando o professor passar as orientações do Dia 2.
 
 ## Diagrama de classes
 
 ![Diagrama de classes](docs/diagrama-classes.png)
 
-## Acompanhamento do Sprint 1
+---
+
+# Acompanhamento do projeto
 
 **Quadro usado:** GitHub Projects.
 
-O quadro deve conter os cartões H01 a H06 nas colunas Todo, In Progress e Done, conforme o andamento real.
+## Sprint 1 — Tarefas
 
-Salve as capturas do quadro em:
+**Quadro no início:**
 
-- Início: `docs/sprint1-inicio.png`
-- Fim: `docs/sprint1-fim.png`
+![Quadro no início do Sprint 1](docs/sprint1-inicio.png)
 
-**Placar do Sprint 1:** 14 de 14 testes aprovados.
+**Quadro no fim:**
 
-**Placar do bônus:** 2 de 5 testes aprovados (B1 — filtros por status e prioridade). Os outros testes de bônus pertencem a etapas posteriores e não fazem parte do Sprint 1.
+O print final do quadro será salvo em `docs/sprint1-fim.png` depois de atualizar os cartões H01 a H06 conforme o andamento da sprint.
 
-## Estrutura principal
+**Placar do `npm run conferir`:** Sprint 1: **14 de 14** · Bônus: **2 de 5**.
 
-```text
-src/
-├── config/
-│   └── db.js
-├── controllers/
-│   └── tarefaController.js
-├── database/
-│   └── todo.sql
-├── middlewares/
-│   ├── logger.js
-│   ├── rotaNaoEncontrada.js
-│   ├── tratarErros.js
-│   └── validarId.js
-├── routes/
-│   ├── index.js
-│   └── tarefaRoutes.js
-├── services/
-│   └── tarefaService.js
-└── index.js
-```
+Os 2 testes aprovados no bônus correspondem aos filtros B1 por status e prioridade.
+
+## Sprint 2 — Categorias e relacionamento
+
+Sprint 2 ainda não iniciado. Aguardando as instruções do professor para começar esta etapa.
+
+Os prints do quadro e o placar desta sprint serão adicionados depois que as atividades forem passadas e realizadas.
+
+## Reflexão final
+
+- **O que aprendi:** Aprendi a organizar uma API no padrão MVC, separando rotas, controllers e services. Também pratiquei os métodos HTTP GET, POST, PUT, PATCH e DELETE, consultas ao MySQL e validação dos dados recebidos.
+- **O que foi mais difícil:** A parte mais difícil foi implementar as alterações com PUT e PATCH sem perder os dados que não deveriam ser modificados, além de verificar se cada rota retornava o status HTTP correto.
+- **O que eu faria diferente:** Eu testaria cada história no Insomnia assim que terminasse sua implementação e atualizaria o quadro e os commits durante o desenvolvimento, para identificar erros mais cedo.
+
