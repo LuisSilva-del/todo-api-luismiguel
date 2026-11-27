@@ -51,9 +51,9 @@ Salve as capturas do quadro em:
 - Início: `docs/sprint1-inicio.png`
 - Fim: `docs/sprint1-fim.png`
 
-**Placar do Sprint 1:** registrar o resultado real do `npm run conferir` após recriar o banco e testar a API.
+**Placar do Sprint 1:** 14 de 14 testes aprovados.
 
-**Placar do bônus:** registrar o resultado real dos filtros após executar os dois testes de B1.
+**Placar do bônus:** 2 de 5 testes aprovados (B1 — filtros por status e prioridade). Os outros testes de bônus pertencem a etapas posteriores e não fazem parte do Sprint 1.
 
 ## Estrutura principal
 
