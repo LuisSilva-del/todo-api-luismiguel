@@ -36,6 +36,25 @@ async function deletarCategoria(id) {
   return { encontrada: true, conflito: false };
 }
 
+async function atualizarCategoria(id, dados) {
+  const categoria = await buscarCategoriaPorId(id);
+  if (!categoria) return null;
+
+  await db.query("UPDATE categorias SET nome = ? WHERE id = ?", [
+    dados.nome,
+    id,
+  ]);
+  return await buscarCategoriaPorId(id);
+}
+
+async function atualizarCategoriaParcial(id, dados) {
+  const categoria = await buscarCategoriaPorId(id);
+  if (!categoria) return null;
+
+  const nome = dados.nome !== undefined ? dados.nome : categoria.nome;
+  return await atualizarCategoria(id, { nome });
+}
+
 function validarCategoria(dados, completo) {
   if (!dados || typeof dados !== "object" || Array.isArray(dados)) {
     return "Envie os dados da categoria em JSON";
@@ -60,5 +79,7 @@ module.exports = {
   buscarCategoriaPorId,
   criarCategoria,
   deletarCategoria,
+  atualizarCategoria,
+  atualizarCategoriaParcial,
   validarCategoria,
 };

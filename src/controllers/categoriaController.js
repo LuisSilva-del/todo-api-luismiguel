@@ -39,9 +39,45 @@ async function deletar(req, res) {
   res.status(204).send();
 }
 
+async function atualizar(req, res) {
+  const erro = categoriaService.validarCategoria(req.body, true);
+  if (erro) {
+    res.status(400).json({ erro: erro });
+    return;
+  }
+  const categoria = await categoriaService.atualizarCategoria(
+    req.params.id,
+    req.body,
+  );
+  if (!categoria) {
+    res.status(404).json({ erro: "Categoria nao encontrada" });
+    return;
+  }
+  res.status(200).json(categoria);
+}
+
+async function atualizarParcial(req, res) {
+  const erro = categoriaService.validarCategoria(req.body, false);
+  if (erro) {
+    res.status(400).json({ erro: erro });
+    return;
+  }
+  const categoria = await categoriaService.atualizarCategoriaParcial(
+    req.params.id,
+    req.body,
+  );
+  if (!categoria) {
+    res.status(404).json({ erro: "Categoria nao encontrada" });
+    return;
+  }
+  res.status(200).json(categoria);
+}
+
 module.exports = {
   listar,
   buscarPorId,
   criar,
   deletar,
+  atualizar,
+  atualizarParcial,
 };
