@@ -2,18 +2,6 @@
 
 const tarefaService = require("../services/tarefaService");
 
-async function categoriaInvalida(dados, res) {
-  if (
-    dados.categoria_id !== undefined &&
-    dados.categoria_id !== null &&
-    !(await tarefaService.categoriaExiste(dados.categoria_id))
-  ) {
-    res.status(400).json({ erro: "A categoria informada nao existe" });
-    return true;
-  }
-  return false;
-}
-
 async function listar(req, res) {
   const tarefas = await tarefaService.listarTarefas(req.query);
   res.status(200).json(tarefas);
@@ -34,7 +22,6 @@ async function criar(req, res) {
     res.status(400).json({ erro: erro });
     return;
   }
-  if (await categoriaInvalida(req.body, res)) return;
 
   const novaTarefa = await tarefaService.criarTarefa(req.body);
   res.status(201).json(novaTarefa);
@@ -46,7 +33,6 @@ async function atualizar(req, res) {
     res.status(400).json({ erro: erro });
     return;
   }
-  if (await categoriaInvalida(req.body, res)) return;
 
   const tarefa = await tarefaService.atualizarTarefa(req.params.id, req.body);
   if (!tarefa) {
@@ -62,7 +48,6 @@ async function atualizarParcial(req, res) {
     res.status(400).json({ erro: erro });
     return;
   }
-  if (await categoriaInvalida(req.body, res)) return;
 
   const tarefa = await tarefaService.atualizarParcialTarefa(
     req.params.id,
