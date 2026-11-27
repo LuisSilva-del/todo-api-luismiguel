@@ -18,14 +18,14 @@ A API usa a porta 3000 por padrão. O arquivo `.env` não deve ser enviado ao Gi
 
 ### Tarefas
 
-| Método | Rota | O que faz | Sucesso |
-|---|---|---|:---:|
-| GET | `/tarefas` | Lista todas as tarefas | 200 |
-| GET | `/tarefas/:id` | Busca uma tarefa pelo ID | 200 |
-| POST | `/tarefas` | Cadastra uma tarefa | 201 |
-| PUT | `/tarefas/:id` | Substitui os dados de uma tarefa | 200 |
-| PATCH | `/tarefas/:id` | Altera somente os campos enviados | 200 |
-| DELETE | `/tarefas/:id` | Exclui uma tarefa | 204 |
+| Método | Rota | O que faz | Sucesso | Erros |
+|---|---|---|:---:|---|
+| GET | `/tarefas` | Lista todas as tarefas | 200 | — |
+| GET | `/tarefas/:id` | Busca uma tarefa pelo ID | 200 | 400 id inválido · 404 não existe |
+| POST | `/tarefas` | Cadastra uma tarefa | 201 | 400 dados inválidos ou categoria inexistente |
+| PUT | `/tarefas/:id` | Substitui os dados de uma tarefa | 200 | 400 dados inválidos · 404 não existe |
+| PATCH | `/tarefas/:id` | Altera somente os campos enviados | 200 | 400 dados inválidos · 404 não existe |
+| DELETE | `/tarefas/:id` | Exclui uma tarefa | 204 | 404 não existe |
 
 Campos obrigatórios para criar ou substituir uma tarefa: `titulo`, `prioridade` e `status`.
 
@@ -37,14 +37,14 @@ O campo opcional `categoria_id` relaciona a tarefa a uma categoria existente. As
 
 ### Categorias
 
-| Método | Rota | O que faz | Sucesso |
-|---|---|---|:---:|
-| GET | `/categorias` | Lista as categorias | 200 |
-| GET | `/categorias/:id` | Busca uma categoria pelo ID | 200 |
-| POST | `/categorias` | Cadastra uma categoria | 201 |
-| DELETE | `/categorias/:id` | Exclui uma categoria sem tarefas vinculadas | 204 |
-| PUT | `/categorias/:id` | Altera o nome da categoria | 200 |
-| PATCH | `/categorias/:id` | Altera parcialmente a categoria | 200 |
+| Método | Rota | O que faz | Sucesso | Erros |
+|---|---|---|:---:|---|
+| GET | `/categorias` | Lista as categorias | 200 | — |
+| GET | `/categorias/:id` | Busca uma categoria pelo ID | 200 | 400 id inválido · 404 não existe |
+| POST | `/categorias` | Cadastra uma categoria | 201 | 400 sem nome |
+| DELETE | `/categorias/:id` | Exclui uma categoria sem tarefas vinculadas | 204 | 404 não existe · 409 possui tarefas |
+| PUT | `/categorias/:id` | Altera o nome da categoria | 200 | 400 sem nome · 404 não existe |
+| PATCH | `/categorias/:id` | Altera parcialmente a categoria | 200 | 400 nome inválido · 404 não existe |
 
 O campo obrigatório para cadastrar uma categoria é `nome`. Uma categoria que possui tarefas vinculadas não pode ser excluída e responde com status 409.
 
