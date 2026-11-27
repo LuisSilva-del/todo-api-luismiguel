@@ -14,8 +14,6 @@ API de gestão de tarefas feita com Node.js, Express e MySQL, no padrão MVC.
 
 ## Endpoints
 
-### Sprint 1 — Tarefas
-
 | Método | Rota | O que faz | Status de sucesso |
 |---|---|---|:---:|
 | GET | `/tarefas` | Lista todas as tarefas | 200 |
@@ -24,24 +22,33 @@ API de gestão de tarefas feita com Node.js, Express e MySQL, no padrão MVC.
 | PUT | `/tarefas/:id` | Substitui os dados de uma tarefa | 200 |
 | PATCH | `/tarefas/:id` | Altera somente os campos enviados | 200 |
 | DELETE | `/tarefas/:id` | Apaga uma tarefa | 204 |
+| GET | `/categorias` | Lista todas as categorias | 200 |
+| GET | `/categorias/:id` | Busca uma categoria pelo ID | 200 |
+| POST | `/categorias` | Cadastra uma categoria | 201 |
+| DELETE | `/categorias/:id` | Apaga uma categoria sem tarefas vinculadas | 204 |
+| PUT | `/categorias/:id` | Altera o nome da categoria (bônus B2) | 200 |
+| PATCH | `/categorias/:id` | Altera o nome da categoria (bônus B2) | 200 |
 
-Os erros das rotas de tarefa seguem o contrato do projeto: ID não numérico responde 400, tarefa inexistente responde 404 e dados inválidos respondem 400.
-
-**Campos da tarefa:**
+### Campos da tarefa
 
 - `id`: número gerado pelo banco.
 - `titulo`: texto obrigatório.
 - `prioridade`: `baixa`, `media` ou `alta`.
 - `status`: `a_fazer`, `fazendo` ou `feita`.
+- `categoria_id`: ID de uma categoria existente; opcional.
 
-### Bônus B1 — Filtros
+As respostas das tarefas incluem o campo `categoria`, com o nome da categoria relacionada. Quando a tarefa não possui categoria, o valor é `null`.
 
-| Método | Rota | O que faz | Status de sucesso |
-|---|---|---|:---:|
-| GET | `/tarefas?status=fazendo` | Lista somente as tarefas com status fazendo | 200 |
-| GET | `/tarefas?prioridade=alta` | Lista somente as tarefas com prioridade alta | 200 |
+### Campos da categoria
 
-**Sprint 2 — Categorias e relacionamento:** ainda não iniciado. Esta etapa será documentada quando o professor passar as orientações do Dia 2.
+- `id`: número gerado pelo banco.
+- `nome`: texto obrigatório.
+
+### Bônus
+
+- **B1 — Filtros:** `GET /tarefas?status=fazendo` e `GET /tarefas?prioridade=alta`.
+- **B2 — Alterar categoria:** `PUT /categorias/:id` e `PATCH /categorias/:id`.
+- **B3 — JSON mal escrito:** corpos JSON inválidos respondem com status 400.
 
 ## Diagrama de classes
 
@@ -63,26 +70,23 @@ Os erros das rotas de tarefa seguem o contrato do projeto: ID não numérico res
 
 ![Quadro do Sprint 1 no fim](docs/sprint1-fim.png)
 
-### Placar final do npm run conferir
-
-Resultado registrado após a execução dos testes:
+### Placar do Sprint 1
 
 - **Sprint 1 — Tarefas: 14 de 14**
-- **Sprint 2 — Categorias e relacionamento: 0 de 8** (não iniciado; fora do escopo desta entrega)
-- **Bônus — desafios: 2 de 5** (os dois filtros B1 foram aprovados)
+- **Bônus após o Sprint 1: 2 de 5** (filtros B1).
 
-![Placar final do npm run conferir](docs/placar-api.png)
-
-### Quadro final do projeto
-
-As imagens acima registram o quadro no início e no fim do Sprint 1.
+![Placar registrado ao final do Sprint 1](docs/placar-api.png)
 
 ## Sprint 2 — Categorias e relacionamento
 
-Sprint 2 ainda não iniciado. Aguardando as instruções do professor para começar esta etapa.
+O Sprint 2 implementa as histórias H07 a H10: cadastro e consulta de categorias, relacionamento entre tarefas e categorias por JOIN, proteção da chave estrangeira e documentação das rotas.
+
+O quadro do início e o quadro do fim desta sprint devem ser registrados em `docs/sprint2-inicio.png` e `docs/sprint2-fim.png`.
+
+**Placar do Sprint 2 e bônus:** atualizar depois de executar `npm run conferir` com o banco recriado pelo script atualizado.
 
 ## Reflexão final
 
-- **O que aprendi:** Aprendi a organizar uma API no padrão MVC, separando rotas, controllers e services. Também pratiquei os métodos HTTP GET, POST, PUT, PATCH e DELETE, consultas ao MySQL e validação dos dados recebidos.
-- **O que foi mais difícil:** A parte mais difícil foi implementar as alterações com PUT e PATCH sem perder os dados que não deveriam ser modificados, além de verificar se cada rota retornava o status HTTP correto.
-- **O que eu faria diferente:** Eu testaria cada história no Insomnia assim que terminasse sua implementação e atualizaria o quadro e os commits durante o desenvolvimento, para identificar erros mais cedo.
+- **O que aprendi:** Aprendi a organizar uma API no padrão MVC, separar rotas, controllers e services, trabalhar com CRUD, consultas SQL, chave estrangeira e JOIN. Também pratiquei validações e o tratamento de erros HTTP.
+- **O que foi mais difícil:** A parte mais difícil foi relacionar as tarefas às categorias sem quebrar as consultas que já funcionavam no Sprint 1, principalmente usando JOIN e tratando tentativas de cadastrar ou apagar categorias inválidas.
+- **O que eu faria diferente:** Eu testaria cada história assim que terminasse sua implementação, manteria o quadro atualizado e verificaria o banco depois de cada mudança no SQL.
