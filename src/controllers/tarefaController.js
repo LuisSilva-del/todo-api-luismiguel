@@ -21,10 +21,31 @@ async function criar(req, res) {
   res.status(201).json(novaTarefa);
 }
 
+async function atualizar(req, res) {
+  const tarefa = await tarefaService.atualizarTarefa(req.params.id, req.body);
+  if (!tarefa) {
+    res.status(404).json({ erro: "Tarefa nao encontrada" });
+    return;
+  }
+  res.status(200).json(tarefa);
+}
+
+async function atualizarParcial(req, res) {
+  const tarefa = await tarefaService.atualizarParcialTarefa(
+    req.params.id,
+    req.body,
+  );
+  if (!tarefa) {
+    res.status(404).json({ erro: "Tarefa nao encontrada" });
+    return;
+  }
+  res.status(200).json(tarefa);
+}
+
 module.exports = {
   listar,
   buscarPorId,
   criar,
-    atualizar,
-  atualizarParcial
+  atualizar,
+  atualizarParcial,
 };

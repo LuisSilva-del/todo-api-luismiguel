@@ -48,4 +48,5 @@ module.exports = {
   buscarTarefaPorId,
   criarTarefa,
   atualizarTarefa,
+  atualizarParcialTarefa,
 };
