@@ -1,11 +1,22 @@
 -- Script do banco da API de Tarefas
 -- Rode este arquivo inteiro no MySQL Workbench (raio ⚡).
 -- Ele apaga e recria tudo: pode rodar de novo sempre que quiser começar do zero.
+
 DROP DATABASE IF EXISTS todo;
 
 CREATE DATABASE todo;
 
 USE todo;
+
+CREATE TABLE categorias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL
+);
+
+INSERT INTO categorias (nome) VALUES
+    ('Escola'),
+    ('Casa'),
+    ('Pessoal');
 
 CREATE TABLE tarefas (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -14,16 +25,10 @@ CREATE TABLE tarefas (
     status VARCHAR(10) NOT NULL
 );
 
-INSERT INTO
-    tarefas (titulo, prioridade, status)
-VALUES
+INSERT INTO tarefas (titulo, prioridade, status) VALUES
     ('Estudar para a prova de PBE', 'alta', 'fazendo'),
     ('Lavar a louça', 'media', 'feita'),
-    ('Arrumar o quarto', 'baixa', 'a fazer');
+    ('Arrumar o quarto', 'baixa', 'a_fazer');
 
-SELECT
-    *
-FROM
-    tarefas;
-
-    
+SELECT * FROM categorias;
+SELECT * FROM tarefas;
