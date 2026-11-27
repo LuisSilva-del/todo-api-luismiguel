@@ -24,5 +24,7 @@ async function criar(req, res) {
 module.exports = {
   listar,
   buscarPorId,
-  criar
+  criar,
+    atualizar,
+  atualizarParcial
 };
