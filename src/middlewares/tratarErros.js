@@ -3,6 +3,11 @@
 function tratarErros(err, req, res, next) {
   console.log("ERRO:", err.code, err.message);
 
+  if (err.type === "entity.parse.failed") {
+    res.status(400).json({ erro: "O JSON enviado esta mal escrito" });
+    return;
+  }
+
   if (err.code === "ER_NO_REFERENCED_ROW_2") {
     res.status(400).json({ erro: "A categoria informada nao existe" });
     return;
