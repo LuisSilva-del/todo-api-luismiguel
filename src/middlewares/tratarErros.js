@@ -1,7 +1,20 @@
-// Recebe qualquer erro que aconteceu numa rota e devolve uma resposta.
+// Recebe erros das rotas e devolve o status adequado.
 
 function tratarErros(err, req, res, next) {
   console.log("ERRO:", err.code, err.message);
+
+  if (err.code === "ER_NO_REFERENCED_ROW_2") {
+    res.status(400).json({ erro: "A categoria informada nao existe" });
+    return;
+  }
+
+  if (err.code === "ER_ROW_IS_REFERENCED_2") {
+    res
+      .status(409)
+      .json({ erro: "A categoria tem tarefas e nao pode ser apagada" });
+    return;
+  }
+
   res.status(500).json({ erro: "Erro interno no servidor" });
 }
 
