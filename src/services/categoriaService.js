@@ -21,8 +21,19 @@ async function criarCategoria(dados) {
 }
 
 async function deletarCategoria(id) {
-  const [resultado] = await db.query("DELETE FROM categorias WHERE id = ?", [id]);
-  return resultado.affectedRows > 0;
+  const categoria = await buscarCategoriaPorId(id);
+  if (!categoria) return { encontrada: false, conflito: false };
+
+  const [tarefas] = await db.query(
+    "SELECT COUNT(*) AS total FROM tarefas WHERE categoria_id = ?",
+    [id],
+  );
+  if (tarefas[0].total > 0) {
+    return { encontrada: true, conflito: true };
+  }
+
+  await db.query("DELETE FROM categorias WHERE id = ?", [id]);
+  return { encontrada: true, conflito: false };
 }
 
 function validarCategoria(dados, completo) {

@@ -27,9 +27,13 @@ async function criar(req, res) {
 }
 
 async function deletar(req, res) {
-  const deletada = await categoriaService.deletarCategoria(req.params.id);
-  if (!deletada) {
+  const resultado = await categoriaService.deletarCategoria(req.params.id);
+  if (!resultado.encontrada) {
     res.status(404).json({ erro: "Categoria nao encontrada" });
+    return;
+  }
+  if (resultado.conflito) {
+    res.status(409).json({ erro: "A categoria possui tarefas vinculadas" });
     return;
   }
   res.status(204).send();
