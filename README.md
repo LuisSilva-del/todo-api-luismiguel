@@ -55,6 +55,14 @@ Os erros das rotas de tarefa seguem o contrato do projeto: ID não numérico res
 
 ## Sprint 1 — Tarefas
 
+### Quadro no início
+
+![Quadro do Sprint 1 no início](docs/sprint1-inicio.png)
+
+### Quadro no fim
+
+![Quadro do Sprint 1 no fim](docs/sprint1-fim.png)
+
 ### Placar final do npm run conferir
 
 Resultado registrado após a execução dos testes:
@@ -67,7 +75,7 @@ Resultado registrado após a execução dos testes:
 
 ### Quadro final do projeto
 
-O arquivo `docs/sprint1-fim.png` existente contém cartões vinculados ao repositório antigo `livraria-api-grupo3`. Para não apresentar uma captura incorreta na entrega, a imagem do quadro final será inserida depois que os cartões H01 a H06 forem registrados no projeto individual e a captura for atualizada.
+As imagens acima registram o quadro no início e no fim do Sprint 1.
 
 ## Sprint 2 — Categorias e relacionamento
 
