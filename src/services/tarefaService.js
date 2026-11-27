@@ -6,6 +6,36 @@ const { db } = require("../config/db");
 const PRIORIDADES = ["baixa", "media", "alta"];
 const STATUS = ["a_fazer", "fazendo", "feita"];
 
+function validarTarefa(dados, completo) {
+  if (!dados || typeof dados !== "object" || Array.isArray(dados)) {
+    return "Envie os dados da tarefa em JSON";
+  }
+
+  if (completo && !dados.titulo) return "O titulo e obrigatorio";
+  if (completo && !dados.prioridade) return "A prioridade e obrigatoria";
+  if (completo && !dados.status) return "O status e obrigatorio";
+
+  if (
+    dados.titulo !== undefined &&
+    (typeof dados.titulo !== "string" || !dados.titulo.trim())
+  ) {
+    return "O titulo e obrigatorio";
+  }
+
+  if (
+    dados.prioridade !== undefined &&
+    !PRIORIDADES.includes(dados.prioridade)
+  ) {
+    return "A prioridade deve ser baixa, media ou alta";
+  }
+
+  if (dados.status !== undefined && !STATUS.includes(dados.status)) {
+    return "O status deve ser a_fazer, fazendo ou feita";
+  }
+
+  return null;
+}
+
 async function listarTarefas(filtros) {
   const [linhas] = await db.query("SELECT * FROM tarefas");
   let resultado = linhas;
@@ -55,4 +85,5 @@ module.exports = {
   atualizarTarefa,
   atualizarParcialTarefa,
   deletarTarefa,
+  validarTarefa,
 };
