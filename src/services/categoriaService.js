@@ -16,6 +16,9 @@ async function buscarCategoriaPorId(id) {
 
 function validarCategoria(dados) {
   if (!dados || !dados.nome) return "O nome e obrigatorio";
+  if (typeof dados.nome !== "string" || !dados.nome.trim()) {
+    return "O nome e obrigatorio";
+  }
   return null;
 }
 
@@ -34,10 +37,20 @@ async function deletarCategoria(id) {
   return resultado.affectedRows > 0;
 }
 
+async function atualizarCategoria(id, dados) {
+  const [resultado] = await db.query(
+    "UPDATE categorias SET nome = ? WHERE id = ?",
+    [dados.nome, id],
+  );
+  if (resultado.affectedRows === 0) return null;
+  return await buscarCategoriaPorId(id);
+}
+
 module.exports = {
   validarCategoria,
   listarCategorias,
   buscarCategoriaPorId,
   criarCategoria,
   deletarCategoria,
+  atualizarCategoria,
 };
